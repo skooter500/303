@@ -11,18 +11,6 @@ config_version=5
 [application]
 
 config/name="303"
-run/main_scene="uid://by0v7as0ensmo"
+run/main_scene="uid://5gyw8mr62t2d"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
-
-[debug_draw_3d]
-
-settings/addon_root_folder="res://addons/debug_draw_3d"
-
-[gui]
-
-theme/custom="uid://b1a52pwwylsfg"
-
-[rendering]
-
-anti_aliasing/quality/msaa_3d=2
