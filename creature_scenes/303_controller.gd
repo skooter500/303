@@ -63,10 +63,24 @@ var log_message:String
 
 func console(message):
 	log_message += (message + "\n")
+	
 	print(message)
 	
 func _process(delta: float) -> void:
 	$scroll/console.text = log_message
+	# Get the ScrollContainer node
+	var scroll_container = $scroll
+
+	# Scroll to the bottom
+	scroll_container.scroll_vertical = scroll_container.get_v_scroll_bar().max_value
+
+	# Scroll to the right edge
+	scroll_container.scroll_horizontal = scroll_container.get_h_scroll_bar().max_value
+
+	# Or both at once
+	scroll_container.scroll_vertical = scroll_container.get_v_scroll_bar().max_value
+	scroll_container.scroll_horizontal = scroll_container.get_h_scroll_bar().max_value
+
 	
 	
 

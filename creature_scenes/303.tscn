@@ -52,33 +52,33 @@ glow_enabled = true
 transform = Transform3D(-0.122775, 0.0213857, 0.992204, 0.171602, 0.985166, 7.50098e-09, -0.977486, 0.170265, -0.124623, 0.618203, 4.96856, -3.23357)
 
 [node name="Jellyquidskeleton" parent="jellyquid2" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.262357, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.766346, 0)
 
 [node name="Skeleton3D" parent="jellyquid2/Jellyquidskeleton" index="0"]
-bones/4/rotation = Quaternion(-0.0772228, -1.18853e-07, -5.40454e-08, 0.997014)
+bones/4/rotation = Quaternion(-0.273112, -1.14677e-07, -7.91121e-08, 0.961982)
 bones/4/scale = Vector3(1, 0.999966, 0.999966)
-bones/5/rotation = Quaternion(0.0741037, -6.42121e-14, -8.88178e-16, 0.997251)
-bones/6/rotation = Quaternion(0.0291744, 4.96343e-14, 0, 0.999574)
-bones/8/rotation = Quaternion(0.0475828, 0.0370033, 0.736749, 0.673475)
-bones/10/rotation = Quaternion(0.0547209, 0.0537355, 0.724734, 0.684747)
-bones/16/rotation = Quaternion(0.0892367, 2.02005e-08, -6.94921e-08, 0.99601)
-bones/17/rotation = Quaternion(-0.0673011, 1.4289e-07, -3.31036e-07, 0.997733)
-bones/18/rotation = Quaternion(0.00534798, -2.46943e-07, -5.80823e-07, 0.999986)
-bones/20/rotation = Quaternion(-0.0232, 0.0111801, -0.739893, 0.672232)
-bones/22/rotation = Quaternion(-0.0448366, 0.0438321, -0.724392, 0.686531)
-bones/27/rotation = Quaternion(-0.640196, 0, 0, 0.768212)
-bones/28/rotation = Quaternion(-0.0407927, 0, 0, 0.999168)
+bones/5/rotation = Quaternion(0.137612, -7.59432e-15, -3.55271e-15, 0.990486)
+bones/6/rotation = Quaternion(0.312198, -2.24254e-14, 3.55271e-15, 0.950017)
+bones/8/rotation = Quaternion(0.247252, 0.25215, 0.683001, 0.639372)
+bones/10/rotation = Quaternion(0.136944, 0.13753, 0.730827, 0.654389)
+bones/16/rotation = Quaternion(0.278218, 1.38086e-07, -6.11117e-08, 0.960518)
+bones/17/rotation = Quaternion(-0.128718, 1.30854e-07, -2.8951e-07, 0.991681)
+bones/18/rotation = Quaternion(-0.277955, -6.79926e-08, -5.64939e-07, 0.960594)
+bones/20/rotation = Quaternion(-0.225557, 0.229515, -0.691612, 0.646622)
+bones/22/rotation = Quaternion(-0.125618, 0.126692, -0.729984, 0.659767)
+bones/27/rotation = Quaternion(-0.490247, 0, 0, 0.871584)
+bones/28/rotation = Quaternion(-0.0678338, 0, 0, 0.997697)
 bones/28/scale = Vector3(1, 0.999927, 0.999927)
-bones/29/rotation = Quaternion(-0.05876, 0, 0, 0.998272)
-bones/30/rotation = Quaternion(0.176756, 0, 0, 0.984255)
-bones/33/rotation = Quaternion(0.671104, 2.09161e-07, -1.89339e-07, 0.741363)
+bones/29/rotation = Quaternion(-0.149361, 0, 0, 0.988783)
+bones/30/rotation = Quaternion(-0.126609, 0, 0, 0.991953)
+bones/33/rotation = Quaternion(0.530862, 2.39093e-07, -1.49772e-07, 0.847458)
 bones/33/scale = Vector3(1, 0.999989, 0.999989)
-bones/34/rotation = Quaternion(0.0150638, -2.71124e-22, -1.54998e-23, 0.999887)
-bones/35/rotation = Quaternion(0.00686697, 1.07411e-21, -1.2557e-22, 0.999977)
-bones/36/rotation = Quaternion(-0.255161, -1.64524e-22, -3.26885e-22, 0.966899)
+bones/34/rotation = Quaternion(0.123491, -2.51069e-23, 2.20347e-22, 0.992346)
+bones/35/rotation = Quaternion(0.0927384, -1.19484e-22, -4.07912e-22, 0.995691)
+bones/36/rotation = Quaternion(-0.0323837, 2.60335e-22, 2.58217e-22, 0.999476)
 
 [node name="jellyquid" parent="jellyquid2/Jellyquidskeleton/Skeleton3D" index="0"]
-"blend_shapes/Key 1" = 0.175391
+"blend_shapes/Key 1" = 0.512718
 surface_material_override/0 = SubResource("StandardMaterial3D_dgghj")
 
 [node name="AnimationTree" type="AnimationTree" parent="jellyquid2"]
@@ -106,6 +106,8 @@ offset_left = 31.0
 offset_top = 21.0
 offset_right = 367.0
 offset_bottom = 632.0
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
 
 [node name="console" type="Label" parent="303_controller/scroll"]
 layout_mode = 2
