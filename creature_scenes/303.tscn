@@ -1,0 +1,123 @@
+[gd_scene load_steps=11 format=3 uid="uid://cds7btjhuoodq"]
+
+[ext_resource type="PackedScene" uid="uid://ndsj5u6ya3to" path="res://Models/jellyquid.blend" id="1_wtms1"]
+[ext_resource type="Script" uid="uid://k0sfsnymcgug" path="res://creature_scenes/303_controller.gd" id="2_1nfj3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dgghj"]
+transparency = 1
+albedo_color = Color(0.766667, 1, 0, 0.788235)
+metallic = 0.92
+metallic_specular = 0.68
+emission_enabled = true
+emission = Color(0.766667, 1, 0, 0.788235)
+emission_energy_multiplier = 1.29
+
+[sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_dgghj"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_r3r2g"]
+animation = &"jellyquidAction"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_shts4"]
+animation = &"Action"
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_dgghj"]
+graph_offset = Vector2(119.49, -70.76)
+nodes/Add2/node = SubResource("AnimationNodeAdd2_dgghj")
+nodes/Add2/position = Vector2(418, 181)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_shts4")
+nodes/Animation/position = Vector2(137, 84)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_r3r2g")
+"nodes/Animation 2/position" = Vector2(168, 303)
+nodes/output/position = Vector2(680, 100)
+node_connections = [&"Add2", 0, &"Animation 2", &"Add2", 1, &"Animation", &"output", 0, &"Add2"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_r3r2g"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_shts4"]
+sky_material = SubResource("ProceduralSkyMaterial_r3r2g")
+
+[sub_resource type="Environment" id="Environment_5lt75"]
+background_mode = 1
+sky = SubResource("Sky_shts4")
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="303" type="Node3D"]
+
+[node name="jellyquid2" parent="." instance=ExtResource("1_wtms1")]
+transform = Transform3D(-0.122775, 0.0213857, 0.992204, 0.171602, 0.985166, 7.50098e-09, -0.977486, 0.170265, -0.124623, 0.618203, 4.96856, -3.23357)
+
+[node name="Jellyquidskeleton" parent="jellyquid2" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0213917, 0)
+
+[node name="Skeleton3D" parent="jellyquid2/Jellyquidskeleton" index="0"]
+bones/4/rotation = Quaternion(-0.00408866, -1.19208e-07, -4.51913e-08, 0.999992)
+bones/4/scale = Vector3(1, 0.999966, 0.999966)
+bones/5/rotation = Quaternion(0.00194839, -4.97449e-14, 1.30451e-15, 0.999998)
+bones/6/rotation = Quaternion(-0.212452, 2.20711e-14, -1.77636e-15, 0.977172)
+bones/8/rotation = Quaternion(-0.129842, -0.1556, 0.749142, 0.630647)
+bones/10/rotation = Quaternion(-0.0284193, -0.0328417, 0.732948, 0.678897)
+bones/16/rotation = Quaternion(0.0183942, -2.90494e-08, -8.55798e-08, 0.999831)
+bones/17/rotation = Quaternion(0.0026482, 1.28073e-07, -3.10595e-07, 0.999997)
+bones/18/rotation = Quaternion(0.235502, -3.61626e-07, -5.09379e-07, 0.971874)
+bones/20/rotation = Quaternion(0.146107, -0.171243, -0.746385, 0.626289)
+bones/22/rotation = Quaternion(0.0358235, -0.0399955, -0.732298, 0.678864)
+bones/27/rotation = Quaternion(-0.694727, 0, 0, 0.719273)
+bones/28/rotation = Quaternion(-0.00494542, 0, 0, 0.999988)
+bones/28/scale = Vector3(1, 0.999927, 0.999927)
+bones/29/rotation = Quaternion(0.037431, 0, 0, 0.999299)
+bones/30/rotation = Quaternion(0.353626, 0, 0, 0.935387)
+bones/33/rotation = Quaternion(0.721985, 1.95208e-07, -2.03694e-07, 0.691909)
+bones/33/scale = Vector3(1, 0.999989, 0.999989)
+bones/34/rotation = Quaternion(-0.0785614, 6.5414e-22, 1.21588e-22, 0.996909)
+bones/35/rotation = Quaternion(-0.0666074, -1.19277e-22, -3.63802e-23, 0.997779)
+bones/36/rotation = Quaternion(-0.336858, 2.34943e-23, 2.00759e-22, 0.941556)
+
+[node name="jellyquid" parent="jellyquid2/Jellyquidskeleton/Skeleton3D" index="0"]
+"blend_shapes/Key 1" = 0.0143136
+surface_material_override/0 = SubResource("StandardMaterial3D_dgghj")
+
+[node name="AnimationTree" type="AnimationTree" parent="jellyquid2"]
+tree_root = SubResource("AnimationNodeBlendTree_dgghj")
+anim_player = NodePath("../AnimationPlayer")
+parameters/Add2/add_amount = 1.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_5lt75")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="camera_rig" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="camera_rig"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
+
+[node name="303_controller" type="Node" parent="."]
+script = ExtResource("2_1nfj3")
+
+[node name="scroll" type="ScrollContainer" parent="303_controller"]
+offset_left = 31.0
+offset_top = 21.0
+offset_right = 367.0
+offset_bottom = 632.0
+
+[node name="console" type="Label" parent="303_controller/scroll"]
+layout_mode = 2
+
+[node name="Node2D" type="Node2D" parent="303_controller"]
+position = Vector2(772, 28)
+
+[node name="Label" type="Label" parent="303_controller/Node2D"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "DHL: 1000
+HHH:100
+"
+
+[editable path="jellyquid2"]

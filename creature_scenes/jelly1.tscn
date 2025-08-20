@@ -1,11 +1,37 @@
-[gd_scene load_steps=9 format=3 uid="uid://bk2nr20rmd36v"]
+[gd_scene load_steps=13 format=3 uid="uid://bk2nr20rmd36v"]
 
 [ext_resource type="PackedScene" uid="uid://ndsj5u6ya3to" path="res://Models/jellyquid.blend" id="1_0tfj1"]
 [ext_resource type="PackedScene" uid="uid://g74tgmcyycu" path="res://Models/Mantasourous.glb" id="1_5lt75"]
 [ext_resource type="Script" uid="uid://b6padv8pk42wn" path="res://start_xr.gd" id="1_dgghj"]
 [ext_resource type="Script" uid="uid://e3mfvu42tg3c" path="res://creature_scenes/mantasourous.gd" id="1_shts4"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dgghj"]
+transparency = 1
+albedo_color = Color(0.766667, 1, 0, 0.788235)
+metallic = 0.92
+metallic_specular = 0.68
+emission_enabled = true
+emission = Color(0.766667, 1, 0, 0.788235)
+emission_energy_multiplier = 1.29
+
+[sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_dgghj"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_r3r2g"]
+animation = &"jellyquidAction"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_shts4"]
+animation = &"Action"
+
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_dgghj"]
+graph_offset = Vector2(119.49, -70.76)
+nodes/Add2/node = SubResource("AnimationNodeAdd2_dgghj")
+nodes/Add2/position = Vector2(418, 181)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_shts4")
+nodes/Animation/position = Vector2(137, 84)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_r3r2g")
+"nodes/Animation 2/position" = Vector2(168, 303)
+nodes/output/position = Vector2(680, 100)
+node_connections = [&"Add2", 0, &"Animation 2", &"Add2", 1, &"Animation", &"output", 0, &"Add2"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_r3r2g"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -25,11 +51,42 @@ glow_enabled = true
 [node name="jelly" type="Node3D"]
 
 [node name="jellyquid2" parent="." instance=ExtResource("1_0tfj1")]
-transform = Transform3D(0.03, 0, 0, 0, 0.03, 0, 0, 0, 0.03, 0.618203, 1.49193, 0)
+transform = Transform3D(0.03, 0, 0, 0, 0.03, 0, 0, 0, 0.03, 0.618203, 1.49193, -3.23357)
+
+[node name="Jellyquidskeleton" parent="jellyquid2" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.143764, 0)
+
+[node name="Skeleton3D" parent="jellyquid2/Jellyquidskeleton" index="0"]
+bones/4/rotation = Quaternion(-0.0885952, -1.18741e-07, -5.5444e-08, 0.996068)
+bones/4/scale = Vector3(1, 0.999966, 0.999966)
+bones/5/rotation = Quaternion(-0.0905968, -4.23107e-14, -8.88179e-16, 0.995888)
+bones/6/rotation = Quaternion(-0.324261, 1.53629e-14, -3.55271e-15, 0.945968)
+bones/8/rotation = Quaternion(-0.230277, -0.261727, 0.713244, 0.608075)
+bones/10/rotation = Quaternion(-0.10233, -0.110387, 0.739235, 0.656411)
+bones/16/rotation = Quaternion(0.100225, 4.13059e-09, -9.93515e-08, 0.994965)
+bones/17/rotation = Quaternion(0.0920585, 1.42343e-07, -1.79756e-07, 0.995754)
+bones/18/rotation = Quaternion(0.339817, -3.87807e-07, -7.37522e-07, 0.940492)
+bones/20/rotation = Quaternion(0.23953, -0.270777, -0.710606, 0.603609)
+bones/22/rotation = Quaternion(0.106967, -0.114267, -0.738352, 0.656001)
+bones/27/rotation = Quaternion(-0.646822, 0, 0, 0.762641)
+bones/28/rotation = Quaternion(0.046035, 0, 0, 0.99894)
+bones/28/scale = Vector3(1, 0.999927, 0.999927)
+bones/29/rotation = Quaternion(0.144795, 0, 0, 0.989462)
+bones/30/rotation = Quaternion(0.376218, 0, 0, 0.926531)
+bones/33/rotation = Quaternion(0.677289, 2.07568e-07, -1.91084e-07, 0.735717)
+bones/33/scale = Vector3(1, 0.999989, 0.999989)
+bones/34/rotation = Quaternion(-0.150567, 2.95371e-22, 1.04061e-22, 0.9886)
+bones/35/rotation = Quaternion(-0.120897, 4.0182e-23, -1.48215e-22, 0.992665)
+bones/36/rotation = Quaternion(-0.311695, 3.89137e-23, 3.70708e-22, 0.950182)
+
+[node name="jellyquid" parent="jellyquid2/Jellyquidskeleton/Skeleton3D" index="0"]
+"blend_shapes/Key 1" = 0.0961322
+surface_material_override/0 = SubResource("StandardMaterial3D_dgghj")
 
 [node name="AnimationTree" type="AnimationTree" parent="jellyquid2"]
 tree_root = SubResource("AnimationNodeBlendTree_dgghj")
 anim_player = NodePath("../AnimationPlayer")
+parameters/Add2/add_amount = 1.0
 
 [node name="Mantasourous" parent="." instance=ExtResource("1_5lt75")]
 transform = Transform3D(-2.18557e-09, 0, 0.05, 0, 0.05, 0, -0.05, 0, -2.18557e-09, 0, 1.44124, -3.14426)
@@ -51,6 +108,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 23)
 [node name="XROrigin3D" type="XROrigin3D" parent="."]
 
 [node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.217003, 1.28229, -2.82104)
 
 [node name="left" type="XRNode3D" parent="XROrigin3D"]
 tracker = &"left_hand"

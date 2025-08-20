@@ -11,13 +11,14 @@ config_version=5
 [application]
 
 config/name="303"
-run/main_scene="uid://bk2nr20rmd36v"
+run/main_scene="uid://cds7btjhuoodq"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
 [rendering]
 
 textures/vram_compression/import_etc2_astc=true
+anti_aliasing/quality/msaa_3d=2
 
 [xr]
 
