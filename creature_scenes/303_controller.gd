@@ -1,12 +1,11 @@
 extends Node
 	
-		
-
 func _ready():
 	OS.open_midi_inputs()
 	print(OS.get_connected_midi_inputs())
 
 func _input(input_event):
+	
 	if input_event is InputEventMIDI:
 		var me:InputEventMIDI = input_event
 		# _print_midi_info(me)
@@ -21,6 +20,7 @@ func _input(input_event):
 			pass
 		if me.message == 8:
 			print("note off")	
+	
 		
 func _print_midi_info(midi_event):
 	
@@ -65,7 +65,53 @@ func console(message):
 	log_message += (message + "\n")
 	
 	print(message)
+
+var vars = Dictionary()
+# var labels = Array()
+
+func variables(key, val):
+	vars[key] = val
 	
+func show_variables():
+	var i = 0
+	for s in vars.keys():
+		var count = $variables/GridContainer.get_child_count()
+		var lab
+		if i == count:
+			lab	= Label.new()
+			lab.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+			$variables/GridContainer.add_child(lab)
+		else:
+			lab = $variables/GridContainer.get_child(i)
+		i = i + 1
+		lab.text = s + ":%07.3f" % float(vars[s])
+		
+func display_variables():
+	# vars.clear()
+	variables("BAS", targetBas)
+	variables("SPE", targetSpe)
+	variables("MUL", targetMul)
+	variables("HUE", targetHue)
+	variables("SAT", targetSat)
+	variables("ALD", targetAld)
+	variables("ALP", targetAlp)
+	variables("CQZ", targetCqz)
+	variables("YAW", targetYaw)
+	variables("ROL", targetRol)
+	variables("DUR", duration)
+	variables("CCO", targetCCo)
+	variables("PIT", targetPit)
+
+	variables("BHU", bhu)
+	variables("BRI", bri)
+	variables("EXP", exp)
+	variables("CON", con)
+	variables("CUE", cue)
+	variables("ARTS", arts.size())
+	
+	show_variables()
+
+
 func _process(delta: float) -> void:
 	$scroll/console.text = log_message
 	# Get the ScrollContainer node
@@ -81,8 +127,7 @@ func _process(delta: float) -> void:
 	scroll_container.scroll_vertical = scroll_container.get_v_scroll_bar().max_value
 	scroll_container.scroll_horizontal = scroll_container.get_h_scroll_bar().max_value
 
-	
-	
+	display_variables()
 
 # --- CONTROLLER CHANGE FUNCTION ---
 func controller_change(channel: int, number: int, value: int) -> void:
@@ -203,5 +248,4 @@ func controller_change(channel: int, number: int, value: int) -> void:
 		targetPit = wrapf(targetPit, -PI, PI)
 		if exp:
 			console("TIP %.0f" % rad_to_deg(targetPit))
-			
-			
+	

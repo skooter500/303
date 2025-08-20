@@ -52,33 +52,33 @@ glow_enabled = true
 transform = Transform3D(-0.122775, 0.0213857, 0.992204, 0.171602, 0.985166, 7.50098e-09, -0.977486, 0.170265, -0.124623, 0.618203, 4.96856, -3.23357)
 
 [node name="Jellyquidskeleton" parent="jellyquid2" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.766346, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.401018, 0)
 
 [node name="Skeleton3D" parent="jellyquid2/Jellyquidskeleton" index="0"]
-bones/4/rotation = Quaternion(-0.273112, -1.14677e-07, -7.91121e-08, 0.961982)
+bones/4/rotation = Quaternion(-0.128042, -1.18228e-07, -6.03408e-08, 0.991769)
 bones/4/scale = Vector3(1, 0.999966, 0.999966)
-bones/5/rotation = Quaternion(0.137612, -7.59432e-15, -3.55271e-15, 0.990486)
-bones/6/rotation = Quaternion(0.312198, -2.24254e-14, 3.55271e-15, 0.950017)
-bones/8/rotation = Quaternion(0.247252, 0.25215, 0.683001, 0.639372)
-bones/10/rotation = Quaternion(0.136944, 0.13753, 0.730827, 0.654389)
-bones/16/rotation = Quaternion(0.278218, 1.38086e-07, -6.11117e-08, 0.960518)
-bones/17/rotation = Quaternion(-0.128718, 1.30854e-07, -2.8951e-07, 0.991681)
-bones/18/rotation = Quaternion(-0.277955, -6.79926e-08, -5.64939e-07, 0.960594)
-bones/20/rotation = Quaternion(-0.225557, 0.229515, -0.691612, 0.646622)
-bones/22/rotation = Quaternion(-0.125618, 0.126692, -0.729984, 0.659767)
-bones/27/rotation = Quaternion(-0.490247, 0, 0, 0.871584)
-bones/28/rotation = Quaternion(-0.0678338, 0, 0, 0.997697)
+bones/5/rotation = Quaternion(0.0984806, -3.5877e-14, -2.66454e-15, 0.995139)
+bones/6/rotation = Quaternion(0.130333, 3.50641e-14, -3.55271e-15, 0.99147)
+bones/8/rotation = Quaternion(0.123751, 0.119559, 0.718971, 0.673403)
+bones/10/rotation = Quaternion(0.0851775, 0.0850332, 0.724767, 0.6784)
+bones/16/rotation = Quaternion(0.138346, 5.64528e-08, -6.14099e-08, 0.990384)
+bones/17/rotation = Quaternion(-0.0909071, 1.65613e-07, -3.03631e-07, 0.995859)
+bones/18/rotation = Quaternion(-0.0936206, -2.02481e-07, -7.49512e-07, 0.995608)
+bones/20/rotation = Quaternion(-0.0981901, 0.0921427, -0.724896, 0.67557)
+bones/22/rotation = Quaternion(-0.0745725, 0.0744878, -0.724344, 0.681335)
+bones/27/rotation = Quaternion(-0.602684, 0, 0, 0.79798)
+bones/28/rotation = Quaternion(-0.0520155, 0, 0, 0.998646)
 bones/28/scale = Vector3(1, 0.999927, 0.999927)
-bones/29/rotation = Quaternion(-0.149361, 0, 0, 0.988783)
-bones/30/rotation = Quaternion(-0.126609, 0, 0, 0.991953)
-bones/33/rotation = Quaternion(0.530862, 2.39093e-07, -1.49772e-07, 0.847458)
+bones/29/rotation = Quaternion(-0.0927467, 0, 0, 0.99569)
+bones/30/rotation = Quaternion(0.0843335, 0, 0, 0.996438)
+bones/33/rotation = Quaternion(0.636074, 2.17699e-07, -1.79456e-07, 0.771628)
 bones/33/scale = Vector3(1, 0.999989, 0.999989)
-bones/34/rotation = Quaternion(0.123491, -2.51069e-23, 2.20347e-22, 0.992346)
-bones/35/rotation = Quaternion(0.0927384, -1.19484e-22, -4.07912e-22, 0.995691)
-bones/36/rotation = Quaternion(-0.0323837, 2.60335e-22, 2.58217e-22, 0.999476)
+bones/34/rotation = Quaternion(0.0517577, -4.06198e-23, 2.20234e-23, 0.99866)
+bones/35/rotation = Quaternion(0.0358807, 6.56493e-23, -5.67673e-23, 0.999356)
+bones/36/rotation = Quaternion(-0.199307, 1.07483e-22, -9.62972e-23, 0.979937)
 
 [node name="jellyquid" parent="jellyquid2/Jellyquidskeleton/Skeleton3D" index="0"]
-"blend_shapes/Key 1" = 0.512718
+"blend_shapes/Key 1" = 0.268328
 surface_material_override/0 = SubResource("StandardMaterial3D_dgghj")
 
 [node name="AnimationTree" type="AnimationTree" parent="jellyquid2"]
@@ -104,25 +104,25 @@ script = ExtResource("2_1nfj3")
 [node name="scroll" type="ScrollContainer" parent="303_controller"]
 offset_left = 31.0
 offset_top = 21.0
-offset_right = 367.0
-offset_bottom = 632.0
+offset_right = 958.0
+offset_bottom = 1046.0
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 3
 
 [node name="console" type="Label" parent="303_controller/scroll"]
 layout_mode = 2
-text = "Console
-Hell
-"
 
 [node name="variables" type="Node2D" parent="303_controller"]
-position = Vector2(772, 28)
+position = Vector2(1692, 15)
 
-[node name="Label" type="Label" parent="303_controller/variables"]
-offset_right = 40.0
-offset_bottom = 23.0
-text = "DHL: 1000
-HHH:100
-"
+[node name="GridContainer" type="GridContainer" parent="303_controller/variables"]
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 159.0
+offset_top = 12.0
+offset_right = 159.0
+offset_bottom = 12.0
+grow_horizontal = 0
 
 [editable path="jellyquid2"]
