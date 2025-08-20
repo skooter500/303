@@ -1,4 +1,4 @@
-extends Node3D
+extends AnimationTree
 
 func _ready() -> void:
 	pass

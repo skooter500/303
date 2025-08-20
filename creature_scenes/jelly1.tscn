@@ -1,7 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bk2nr20rmd36v"]
+[gd_scene load_steps=9 format=3 uid="uid://bk2nr20rmd36v"]
 
 [ext_resource type="PackedScene" uid="uid://ndsj5u6ya3to" path="res://Models/jellyquid.blend" id="1_0tfj1"]
+[ext_resource type="PackedScene" uid="uid://g74tgmcyycu" path="res://Models/Mantasourous.glb" id="1_5lt75"]
 [ext_resource type="Script" uid="uid://b6padv8pk42wn" path="res://start_xr.gd" id="1_dgghj"]
+[ext_resource type="Script" uid="uid://e3mfvu42tg3c" path="res://creature_scenes/mantasourous.gd" id="1_shts4"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_dgghj"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_r3r2g"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -11,15 +15,25 @@ ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
 sky_material = SubResource("ProceduralSkyMaterial_r3r2g")
 
 [sub_resource type="Environment" id="Environment_5lt75"]
-background_mode = 2
+background_mode = 1
 sky = SubResource("Sky_shts4")
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
 tonemap_mode = 2
 glow_enabled = true
 
 [node name="jelly" type="Node3D"]
 
 [node name="jellyquid2" parent="." instance=ExtResource("1_0tfj1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.02964)
+transform = Transform3D(0.03, 0, 0, 0, 0.03, 0, 0, 0, 0.03, 0.618203, 1.49193, 0)
+
+[node name="AnimationTree" type="AnimationTree" parent="jellyquid2"]
+tree_root = SubResource("AnimationNodeBlendTree_dgghj")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="Mantasourous" parent="." instance=ExtResource("1_5lt75")]
+transform = Transform3D(-2.18557e-09, 0, 0.05, 0, 0.05, 0, -0.05, 0, -2.18557e-09, 0, 1.44124, -3.14426)
+script = ExtResource("1_shts4")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_5lt75")
@@ -44,5 +58,5 @@ tracker = &"left_hand"
 [node name="right" type="XRNode3D" parent="XROrigin3D"]
 tracker = &"right_hand"
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.7443)
+[editable path="jellyquid2"]
+[editable path="Mantasourous"]
