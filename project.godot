@@ -11,6 +11,21 @@ config_version=5
 [application]
 
 config/name="303"
-run/main_scene="uid://5gyw8mr62t2d"
+run/main_scene="uid://bk2nr20rmd36v"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
+
+[rendering]
+
+textures/vram_compression/import_etc2_astc=true
+
+[xr]
+
+openxr/enabled=true
+openxr/environment_blend_mode=2
+openxr/startup_alert=false
+openxr/extensions/hand_tracking=true
+shaders/enabled=true
+openxr/extensions/meta/passthrough=true
+openxr/extensions/meta/hand_tracking_mesh=true
+openxr/extensions/meta/color_space/starting_color_space=3

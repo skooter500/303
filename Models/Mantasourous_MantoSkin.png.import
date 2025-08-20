@@ -2,18 +2,21 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bjijkga8k26mq"
-path.s3tc="res://.godot/imported/triangle.png-eeb22679f0633a6ec92e6389c0402160.s3tc.ctex"
-path.etc2="res://.godot/imported/triangle.png-eeb22679f0633a6ec92e6389c0402160.etc2.ctex"
+uid="uid://dsgr0y736unru"
+path.s3tc="res://.godot/imported/Mantasourous_MantoSkin.png-2c1661dd93d20bdd9f951095af91394d.s3tc.ctex"
+path.etc2="res://.godot/imported/Mantasourous_MantoSkin.png-2c1661dd93d20bdd9f951095af91394d.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
+generator_parameters={
+"md5": "0dbaaf883f20c8a8ddbef76c38111b9d"
+}
 
 [deps]
 
-source_file="res://behaviors/triangle.png"
-dest_files=["res://.godot/imported/triangle.png-eeb22679f0633a6ec92e6389c0402160.s3tc.ctex", "res://.godot/imported/triangle.png-eeb22679f0633a6ec92e6389c0402160.etc2.ctex"]
+source_file="res://Models/Mantasourous_MantoSkin.png"
+dest_files=["res://.godot/imported/Mantasourous_MantoSkin.png-2c1661dd93d20bdd9f951095af91394d.s3tc.ctex", "res://.godot/imported/Mantasourous_MantoSkin.png-2c1661dd93d20bdd9f951095af91394d.etc2.ctex"]
 
 [params]
 

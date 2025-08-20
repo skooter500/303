@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=3 uid="uid://bk2nr20rmd36v"]
+
+[ext_resource type="PackedScene" uid="uid://ndsj5u6ya3to" path="res://Models/jellyquid.blend" id="1_0tfj1"]
+[ext_resource type="Script" uid="uid://b6padv8pk42wn" path="res://start_xr.gd" id="1_dgghj"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_r3r2g"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_shts4"]
+sky_material = SubResource("ProceduralSkyMaterial_r3r2g")
+
+[sub_resource type="Environment" id="Environment_5lt75"]
+background_mode = 2
+sky = SubResource("Sky_shts4")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="jelly" type="Node3D"]
+
+[node name="jellyquid2" parent="." instance=ExtResource("1_0tfj1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.02964)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_5lt75")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="start_xr" type="Node" parent="."]
+script = ExtResource("1_dgghj")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 23)
+
+[node name="XROrigin3D" type="XROrigin3D" parent="."]
+
+[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
+
+[node name="left" type="XRNode3D" parent="XROrigin3D"]
+tracker = &"left_hand"
+
+[node name="right" type="XRNode3D" parent="XROrigin3D"]
+tracker = &"right_hand"
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.7443)
