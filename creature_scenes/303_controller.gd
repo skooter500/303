@@ -1,8 +1,24 @@
 extends Node
 
+static var current_scene = 0
+
+@export var scenes: Array[String] = [ \
+	"res://creature_scenes/303.tscn",
+	"res://behaviors/SchoolWithAvoidance.tscn", \
+	]
+	
+func change_to_scene(scene_path: String):
+	get_tree().change_scene_to_file(scene_path)
+	
 func _ready():
 	OS.open_midi_inputs()
 	print(OS.get_connected_midi_inputs())
+	
+func play_note(me:InputEventMIDI):
+	current_scene += 1
+	await get_tree().process_frame
+	change_to_scene(scenes[current_scene]) 
+	pass
 
 func _input(input_event):
 	
@@ -15,7 +31,7 @@ func _input(input_event):
 			
 		if me.message == 9:	
 					
-			# play_note(me)
+			play_note(me)
 			# _print_midi_info(me)
 			pass
 		if me.message == 8:

@@ -18,7 +18,8 @@ func _ready():
 	ui = self
 	
 static func variables(key, val):
-	ui.vars[key] = val
+	if ui:
+		ui.vars[key] = val
 	
 func _process(delta: float) -> void:
 	$scroll/console.text = log_message
