@@ -5,6 +5,7 @@ static var current_scene = 0
 @export var scenes: Array[String] = [ \
 	"res://creature_scenes/303.tscn",
 	"res://behaviors/SchoolWithAvoidance.tscn", \
+	"res://creature_scenes/manta.tscn", \
 	]
 	
 func change_to_scene(scene_path: String):

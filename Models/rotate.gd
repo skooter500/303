@@ -1,4 +1,7 @@
 extends Node3D
 
 func _process(delta: float) -> void:
-	rotate_y(delta * 0.1)
+	rotation = Vector3(Controller303.targetPit, Controller303.targetYaw, Controller303.targetRol)
+	
+	
+	

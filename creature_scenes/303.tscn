@@ -1,10 +1,12 @@
-[gd_scene load_steps=13 format=3 uid="uid://cds7btjhuoodq"]
+[gd_scene load_steps=15 format=3 uid="uid://cds7btjhuoodq"]
 
 [ext_resource type="PackedScene" uid="uid://civ5ab35112gw" path="res://ui.tscn" id="1_kbu7r"]
+[ext_resource type="Script" uid="uid://o55gvefis76p" path="res://creature_scenes/303.gd" id="1_mykux"]
 [ext_resource type="PackedScene" uid="uid://ndsj5u6ya3to" path="res://Models/jellyquid.blend" id="1_wtms1"]
 [ext_resource type="Shader" uid="uid://b7t3voievq70g" path="res://GLASS.gdshader" id="2_2ps6i"]
 [ext_resource type="Script" uid="uid://3h1voejn0dq8" path="res://Models/rotate.gd" id="3_kbu7r"]
 [ext_resource type="Material" uid="uid://bnuvuaqxq1fol" path="res://creature_scenes/new_panorama_sky_material.tres" id="4_wtms1"]
+[ext_resource type="PackedScene" uid="uid://u484aytxc0ls" path="res://Space Skybox.tscn" id="6_j7qcs"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wtms1"]
 render_priority = 0
@@ -30,13 +32,12 @@ animation = &"jellyquidAction"
 animation = &"Action"
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_dgghj"]
-graph_offset = Vector2(119.49, -70.76)
 nodes/Add2/node = SubResource("AnimationNodeAdd2_dgghj")
-nodes/Add2/position = Vector2(418, 181)
+nodes/Add2/position = Vector2(380, 200)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_shts4")
-nodes/Animation/position = Vector2(137, 84)
+nodes/Animation/position = Vector2(100, 180)
 "nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_r3r2g")
-"nodes/Animation 2/position" = Vector2(168, 303)
+"nodes/Animation 2/position" = Vector2(160, 360)
 nodes/output/position = Vector2(680, 100)
 node_connections = [&"Add2", 0, &"Animation 2", &"Add2", 1, &"Animation", &"output", 0, &"Add2"]
 
@@ -64,9 +65,8 @@ fog_light_color = Color(0.517647, 0.352941, 0.607843, 1)
 fog_light_energy = 0.5
 fog_sun_scatter = 0.2
 fog_density = 1.0
-volumetric_fog_enabled = true
 volumetric_fog_density = 0.02
-volumetric_fog_albedo = Color(0.427451, 0.427451, 0.427451, 1)
+volumetric_fog_albedo = Color(0.295866, 0.295867, 0.295866, 1)
 volumetric_fog_emission = Color(0.294118, 0.0941176, 0.294118, 1)
 volumetric_fog_emission_energy = 0.2
 adjustment_enabled = true
@@ -75,6 +75,7 @@ adjustment_contrast = 1.3
 adjustment_saturation = 1.8
 
 [node name="303" type="Node3D"]
+script = ExtResource("1_mykux")
 
 [node name="ui" parent="." instance=ExtResource("1_kbu7r")]
 
@@ -83,35 +84,38 @@ transform = Transform3D(0.977341, -0.170573, 0.125333, 0.171929, 0.985109, 0, -0
 script = ExtResource("3_kbu7r")
 
 [node name="Jellyquidskeleton" parent="jellyquid2" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.35425, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.46579, 0)
 
 [node name="Skeleton3D" parent="jellyquid2/Jellyquidskeleton" index="0"]
-bones/4/rotation = Quaternion(-0.513182, -1.02315e-07, -1.13264e-07, 0.85828)
+bones/4/rotation = Quaternion(-0.580853, -9.70374e-08, -1.24161e-07, 0.814009)
 bones/4/scale = Vector3(1, 0.999966, 0.999966)
-bones/5/rotation = Quaternion(0.128711, -7.56271e-15, -7.10544e-15, 0.991682)
-bones/6/rotation = Quaternion(0.407447, 1.27633e-14, -7.10543e-15, 0.913229)
-bones/8/rotation = Quaternion(0.286396, 0.291699, 0.687324, 0.600395)
-bones/10/rotation = Quaternion(0.148996, 0.149103, 0.739969, 0.63876)
-bones/16/rotation = Quaternion(0.510048, 1.20582e-07, 5.47687e-08, 0.860146)
-bones/17/rotation = Quaternion(-0.120242, 1.44772e-07, -2.09251e-07, 0.992745)
-bones/18/rotation = Quaternion(-0.378957, -2.324e-08, -1.00445e-06, 0.925414)
-bones/20/rotation = Quaternion(-0.268439, 0.275032, -0.695656, 0.606927)
-bones/22/rotation = Quaternion(-0.138204, 0.139159, -0.738948, 0.644585)
-bones/27/rotation = Quaternion(-0.279366, 0, 0, 0.960185)
-bones/28/rotation = Quaternion(-0.0551597, 0, 0, 0.998478)
+bones/5/rotation = Quaternion(0.0409549, -4.27781e-14, 4.44089e-16, 0.999161)
+bones/6/rotation = Quaternion(0.313633, 1.30966e-14, 7.10543e-15, 0.949544)
+bones/8/rotation = Quaternion(0.206057, 0.204437, 0.726428, 0.622935)
+bones/10/rotation = Quaternion(0.0815913, 0.0809092, 0.730618, 0.673048)
+bones/16/rotation = Quaternion(0.575845, 1.33301e-07, 8.04696e-08, 0.817559)
+bones/17/rotation = Quaternion(-0.0351767, 1.3095e-07, -1.92377e-07, 0.999381)
+bones/18/rotation = Quaternion(-0.280677, -1.01076e-07, -9.65704e-07, 0.959802)
+bones/20/rotation = Quaternion(-0.184173, 0.183757, -0.732642, 0.628927)
+bones/22/rotation = Quaternion(-0.0716464, 0.0711918, -0.730208, 0.675718)
+bones/27/rotation = Quaternion(-0.21983, 0, 0, 0.975538)
+bones/28/rotation = Quaternion(-0.00514224, 0, 0, 0.999987)
 bones/28/scale = Vector3(1, 0.999927, 0.999927)
-bones/29/rotation = Quaternion(-0.155268, 0, 0, 0.987872)
-bones/30/rotation = Quaternion(-0.291305, 0, 0, 0.95663)
-bones/33/rotation = Quaternion(0.331841, 2.66143e-07, -9.36222e-08, 0.943336)
+bones/29/rotation = Quaternion(-0.0567611, 0, 0, 0.998388)
+bones/30/rotation = Quaternion(-0.242032, 0, 0, 0.970268)
+bones/33/rotation = Quaternion(0.27512, 2.71243e-07, -7.76197e-08, 0.96141)
 bones/33/scale = Vector3(1, 0.999989, 0.999989)
-bones/34/rotation = Quaternion(0.165963, -9.03786e-22, -3.50868e-22, 0.986132)
-bones/35/rotation = Quaternion(0.12791, 5.67327e-22, -2.43771e-22, 0.991786)
-bones/36/rotation = Quaternion(0.194182, 1.15706e-21, 4.26324e-22, 0.980966)
+bones/34/rotation = Quaternion(0.0947199, 4.18335e-23, -1.06695e-22, 0.995504)
+bones/35/rotation = Quaternion(0.074408, 7.24947e-22, -6.34e-23, 0.997228)
+bones/36/rotation = Quaternion(0.214979, -3.70826e-22, -3.41177e-23, 0.976619)
 
 [node name="jellyquid" parent="jellyquid2/Jellyquidskeleton/Skeleton3D" index="0"]
 transform = Transform3D(-0.430709, 0.249699, 0.86726, 0.249699, 0.956421, -0.151361, -0.867261, 0.151361, -0.474288, 0.456508, 0.59364, 0)
-"blend_shapes/Key 1" = 0.906156
+"blend_shapes/Key 1" = 0.981048
 surface_material_override/0 = SubResource("ShaderMaterial_wtms1")
+
+[node name="AnimationPlayer" parent="jellyquid2" index="1"]
+speed_scale = 2.219
 
 [node name="AnimationTree" type="AnimationTree" parent="jellyquid2"]
 tree_root = SubResource("AnimationNodeBlendTree_dgghj")
@@ -129,5 +133,7 @@ shadow_enabled = true
 
 [node name="Camera3D" type="Camera3D" parent="camera_rig"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
+
+[node name="basic_skybox_3d_flip" parent="." instance=ExtResource("6_j7qcs")]
 
 [editable path="jellyquid2"]
