@@ -42,12 +42,19 @@ func show_variables():
 	var i = 0
 	for s in vars.keys():
 		var count = $variables/GridContainer.get_child_count()
-		var lab
+		var lab:Label
 		if i == count:
 			lab	= Label.new()
 			lab.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 			$variables/GridContainer.add_child(lab)
 		else:
-			lab = $variables/GridContainer.get_child(i)
+			lab = $variables/GridContainer.get_child(i)		
 		i = i + 1
-		lab.text = s + ":%07.3f" % float(vars[s])
+		var v = float(vars[s])
+		var absv = abs(v)
+		lab.text = s + ":%07.3f" % absv
+		if v < 0:
+			lab.modulate = Color.REBECCA_PURPLE
+		else:
+			lab.modulate = Color.GREEN
+		
