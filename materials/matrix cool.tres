@@ -1,9 +1,3 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=2]
-[ext_resource path="matrix cool.gdshader" type="Shader" id=1]
-[ext_resource path="matrix cool_texture_1.png" type="Texture" id=2]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://d00h6yx71kn15"]
+
 [resource]
-shader = ExtResource( 1 )
-shader_param/texture_1 = ExtResource( 2 )
-
-
-

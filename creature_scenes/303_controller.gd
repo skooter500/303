@@ -16,7 +16,7 @@ func _ready():
 	print(OS.get_connected_midi_inputs())
 	
 func play_note(me:InputEventMIDI):
-	current_scene += 1
+	current_scene = (current_scene + 1) % 3
 	await get_tree().process_frame
 	change_to_scene(scenes[current_scene]) 
 	pass
