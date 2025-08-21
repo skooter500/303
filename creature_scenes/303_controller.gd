@@ -1,5 +1,5 @@
 extends Node
-	
+
 func _ready():
 	OS.open_midi_inputs()
 	print(OS.get_connected_midi_inputs())
@@ -59,101 +59,64 @@ func _print_midi_info(midi_event):
 @export var targetCCo: float = 0.0
 @export var targetPit: float = 0.0
 
-var log_message:String
-
-func console(message):
-	log_message += (message + "\n")
-	
-	print(message)
-
-var vars = Dictionary()
 # var labels = Array()
 
-func variables(key, val):
-	vars[key] = val
-	
-func show_variables():
-	var i = 0
-	for s in vars.keys():
-		var count = $variables/GridContainer.get_child_count()
-		var lab
-		if i == count:
-			lab	= Label.new()
-			lab.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
-			$variables/GridContainer.add_child(lab)
-		else:
-			lab = $variables/GridContainer.get_child(i)
-		i = i + 1
-		lab.text = s + ":%07.3f" % float(vars[s])
+
 		
 func display_variables():
 	# vars.clear()
-	variables("BAS", targetBas)
-	variables("SPE", targetSpe)
-	variables("MUL", targetMul)
-	variables("HUE", targetHue)
-	variables("SAT", targetSat)
-	variables("ALD", targetAld)
-	variables("ALP", targetAlp)
-	variables("CQZ", targetCqz)
-	variables("YAW", targetYaw)
-	variables("ROL", targetRol)
-	variables("DUR", duration)
-	variables("CCO", targetCCo)
-	variables("PIT", targetPit)
+	UI.variables("BAS", targetBas)
+	UI.variables("SPE", targetSpe)
+	UI.variables("MUL", targetMul)
+	UI.variables("HUE", targetHue)
+	UI.variables("SAT", targetSat)
+	UI.variables("ALD", targetAld)
+	UI.variables("ALP", targetAlp)
+	UI.variables("CQZ", targetCqz)
+	UI.variables("YAW", targetYaw)
+	UI.variables("ROL", targetRol)
+	UI.variables("DUR", duration)
+	UI.variables("CCO", targetCCo)
+	UI.variables("PIT", targetPit)
 
-	variables("BHU", bhu)
-	variables("BRI", bri)
-	variables("EXP", exp)
-	variables("CON", con)
-	variables("CUE", cue)
-	variables("ARTS", arts.size())
+	UI.variables("BHU", bhu)
+	UI.variables("BRI", bri)
+	UI.variables("EXP", exp)
+	UI.variables("CON", con)
+	UI.variables("CUE", cue)
+	UI.variables("ARTS", arts.size())
 	
-	show_variables()
+	
 
 
 func _process(delta: float) -> void:
-	$scroll/console.text = log_message
-	# Get the ScrollContainer node
-	var scroll_container = $scroll
-
-	# Scroll to the bottom
-	scroll_container.scroll_vertical = scroll_container.get_v_scroll_bar().max_value
-
-	# Scroll to the right edge
-	scroll_container.scroll_horizontal = scroll_container.get_h_scroll_bar().max_value
-
-	# Or both at once
-	scroll_container.scroll_vertical = scroll_container.get_v_scroll_bar().max_value
-	scroll_container.scroll_horizontal = scroll_container.get_h_scroll_bar().max_value
-
 	display_variables()
 
 # --- CONTROLLER CHANGE FUNCTION ---
 func controller_change(channel: int, number: int, value: int) -> void:
 	if exp:
-		console("CH %s NUM %s VA %s" % [channel, number, value])
+		UI.console("CH %s NUM %s VA %s" % [channel, number, value])
 	var clock_wise = value < 100
 
 	if number == 7:
 		targetSpe = lerp(0.0, 3.58, float(value) / 127.0)
 		if exp:
-			console("Z80 %.2f MHZ" % targetSpe)
+			UI.console("Z80 %.2f MHZ" % targetSpe)
 
 	if number == 10:
 		targetBas = lerp(0.0, 20.0, float(value) / 127.0)
 		if exp:
-			console("SAB %.2f" % targetBas)
+			UI.console("SAB %.2f" % targetBas)
 
 	if number == 114:
 		targetMul = lerp(0.0, 2.0, float(value) / 127.0)
 		if exp:
-			console("LUM %.2f" % targetMul)
+			UI.console("LUM %.2f" % targetMul)
 
 	if number == 74:
 		targetHue = lerp(0.0, 255.0, float(value) / 127.0)
 		if exp:
-			console("EUH %.2f" % targetHue)
+			UI.console("EUH %.2f" % targetHue)
 
 	if number == 73 and matchingFiles.size() > 0:
 		var b = int(lerp(0.0, matchingFiles.size() - 1, float(value) / 127.0))
@@ -167,85 +130,85 @@ func controller_change(channel: int, number: int, value: int) -> void:
 			# text_font(font) # Implement text_font if needed
 			# myTMoveMusextarea.setFont(font) # Implement if needed
 			if exp:
-				console("BHU %d" % bhu)
-				console("FNT: %s" % fnt)
-				console("abcdefghijklmnopqrstuvwxyz ABCDDEFGHIJKLMNOPQRSTUVWXYZ0123456789 color auto goto list run")
+				UI.console("BHU %d" % bhu)
+				UI.console("FNT: %s" % fnt)
+				UI.console("abcdefghijklmnopqrstuvwxyz ABCDDEFGHIJKLMNOPQRSTUVWXYZ0123456789 color auto goto list run")
 
 	if number == 18:
 		con = int(lerp(0.0, 255.0, float(value) / 127.0))
 		if exp:
-			console("CON %d" % con)
+			UI.console("CON %d" % con)
 		targetSat = lerp(0.0, 255.0, float(value) / 127.0)
 		if exp:
-			console("TAS %.2f" % targetSat)
+			UI.console("TAS %.2f" % targetSat)
 
 	if number == 79:
 		bri = int(lerp(1.0, 100.0, float(value) / 127.0))
 		if exp:
-			console("BRI %d" % bri)
+			UI.console("BRI %d" % bri)
 		if matchingFiles.size() > 0:
 			var fnt = str(matchingFiles[bhu])
 			# font = create_font(fnt, bri)
 			# text_font(font, bri)
 			# myTextarea.setFont(font)
-			console("abcdefghijklmnopqrstuvwxyz ABCDDEFGHIJKLMNOPQRSTUVWXYZ0123456789 color auto goto list run")
+			UI.console("abcdefghijklmnopqrstuvwxyz ABCDDEFGHIJKLMNOPQRSTUVWXYZ0123456789 color auto goto list run")
 
 	if number == 75 and arts.size() > 0:
 		cue = int(lerp(0.0, arts.size() - 1, float(value) / 127.0))
-		console("EUC: %d" % cue)
+		UI.console("EUC: %d" % cue)
 		var a = arts[cue]
-		console("CUE ART: %s.art" % [str(a)])
+		UI.console("CUE ART: %s.art" % [str(a)])
 		return
 
 	if number == 76:
 		targetAld = lerp(0.0, 50.0, float(value) / 127.0)
 		if exp:
-			console("DAL %.2f" % targetAld)
+			UI.console("DAL %.2f" % targetAld)
 
 	if number == 19:
 		targetAlp = lerp(0.0, 255.0, float(value) / 127.0)
 		if exp:
-			console("PLA %.2f" % targetAlp)
+			UI.console("PLA %.2f" % targetAlp)
 	if number == 79:
 		bri = int(lerp(1.0, 100.0, float(value) / 127.0))
 		if exp:
-			console("BRI %d" % bri)
+			UI.console("BRI %d" % bri)
 		if matchingFiles.size() > 0:
 			var fnt = str(matchingFiles[bhu])
 			# font = create_font(fnt, bri)
 			# text_font(font, bri)
 			# myTextarea.setFont(font)
-			console("abcdefghijklmnopqrstuvwxyz ABCDDEFGHIJKLMNOPQRSTUVWXYZ0123456789 color auto goto list run")
+			UI.console("abcdefghijklmnopqrstuvwxyz ABCDDEFGHIJKLMNOPQRSTUVWXYZ0123456789 color auto goto list run")
 
 	if number == 71:
 		targetCqz = lerp(1.0, 255.0, float(value) / 127.0)
 		if exp:
-			console("cqz %.2f" % targetCqz)
+			UI.console("cqz %.2f" % targetCqz)
 
 	if number == 77:
 		targetYaw = lerp(-PI, PI, float(value) / 127.0)
 		if exp:
-			console("WAY %.0f" % rad_to_deg(targetYaw))
+			UI.console("WAY %.0f" % rad_to_deg(targetYaw))
 
 	if number == 93:
 		targetRol = lerp(-PI, PI, float(value) / 127.0)
 		targetRol = wrapf(targetRol, -PI, PI)
 		if exp:
-			console("LOR %.0f" % rad_to_deg(targetRol))
+			UI.console("LOR %.0f" % rad_to_deg(targetRol))
 
 	if number == 90:
 		duration = lerp(0.0, 10.0, float(value) / 127.0)
 		if exp:
-			console("DUR %.2f" % duration)
+			UI.console("DUR %.2f" % duration)
 
 	if number == 91:
 		targetCCo = lerp(0.0, 255.0, float(value) / 127.0)
 		if exp:
-			console("OCC %.2f" % targetCCo)
+			UI.console("OCC %.2f" % targetCCo)
 
 	if number == 17:
 		targetPit = lerp(-PI, PI, float(value) / 127.0)
 		targetPit = wrapf(targetPit, -PI, PI)
 		if exp:
-			console("TIP %.0f" % rad_to_deg(targetPit))
+			UI.console("TIP %.0f" % rad_to_deg(targetPit))
 	

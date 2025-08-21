@@ -1,16 +1,24 @@
-[gd_scene load_steps=11 format=3 uid="uid://cds7btjhuoodq"]
+[gd_scene load_steps=12 format=3 uid="uid://cds7btjhuoodq"]
 
+[ext_resource type="Script" uid="uid://b0nuq5dkf2nri" path="res://creature_scenes/ui.gd" id="1_kbu7r"]
 [ext_resource type="PackedScene" uid="uid://ndsj5u6ya3to" path="res://Models/jellyquid.blend" id="1_wtms1"]
-[ext_resource type="Script" uid="uid://k0sfsnymcgug" path="res://creature_scenes/303_controller.gd" id="2_1nfj3"]
+[ext_resource type="Shader" uid="uid://b7t3voievq70g" path="res://GLASS.gdshader" id="2_2ps6i"]
+[ext_resource type="Material" uid="uid://bnuvuaqxq1fol" path="res://creature_scenes/new_panorama_sky_material.tres" id="4_wtms1"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dgghj"]
-transparency = 1
-albedo_color = Color(0.766667, 1, 0, 0.788235)
-metallic = 0.92
-metallic_specular = 0.68
-emission_enabled = true
-emission = Color(0.766667, 1, 0, 0.788235)
-emission_energy_multiplier = 1.29
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wtms1"]
+render_priority = 0
+shader = ExtResource("2_2ps6i")
+shader_parameter/albedo = Color(1, 1, 1, 0)
+shader_parameter/roughness = 0.15
+shader_parameter/refraction = 0.5
+shader_parameter/refraction_texture_channel = Vector4(1, 0, 0, 0)
+shader_parameter/normal_strength = 0.0
+shader_parameter/edge_color = Color(0, 0, 0, 1)
+shader_parameter/surface_contribution = 0.2
+shader_parameter/specular_contribution = 0.2
+shader_parameter/refraction_contribution = 1.0
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
 
 [sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_dgghj"]
 
@@ -31,55 +39,102 @@ nodes/Animation/position = Vector2(137, 84)
 nodes/output/position = Vector2(680, 100)
 node_connections = [&"Add2", 0, &"Animation 2", &"Add2", 1, &"Animation", &"output", 0, &"Add2"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_r3r2g"]
-sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
-ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
-
-[sub_resource type="Sky" id="Sky_shts4"]
-sky_material = SubResource("ProceduralSkyMaterial_r3r2g")
+[sub_resource type="Sky" id="Sky_wtms1"]
+sky_material = ExtResource("4_wtms1")
+radiance_size = 4
 
 [sub_resource type="Environment" id="Environment_5lt75"]
-background_mode = 1
-sky = SubResource("Sky_shts4")
-ambient_light_source = 2
+background_mode = 2
+background_energy_multiplier = 2.0
+sky = SubResource("Sky_wtms1")
+sky_custom_fov = 90.0
+sky_rotation = Vector3(0, 3.14159, 0)
 ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 1.94
 tonemap_mode = 2
 glow_enabled = true
+glow_intensity = 0.14
+glow_bloom = 0.3
+glow_blend_mode = 1
+glow_hdr_threshold = 0.8
+glow_hdr_scale = 2.5
+fog_mode = 1
+fog_light_color = Color(0.517647, 0.352941, 0.607843, 1)
+fog_light_energy = 0.5
+fog_sun_scatter = 0.2
+fog_density = 1.0
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.02
+volumetric_fog_albedo = Color(0.427451, 0.427451, 0.427451, 1)
+volumetric_fog_emission = Color(0.294118, 0.0941176, 0.294118, 1)
+volumetric_fog_emission_energy = 0.2
+adjustment_enabled = true
+adjustment_brightness = 1.3
+adjustment_contrast = 1.3
+adjustment_saturation = 1.8
 
 [node name="303" type="Node3D"]
 
+[node name="ui" type="Node" parent="."]
+script = ExtResource("1_kbu7r")
+
+[node name="scroll" type="ScrollContainer" parent="ui"]
+offset_left = 31.0
+offset_top = 21.0
+offset_right = 958.0
+offset_bottom = 637.0
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="console" type="Label" parent="ui/scroll"]
+layout_mode = 2
+
+[node name="variables" type="Node2D" parent="ui"]
+position = Vector2(1692, 15)
+
+[node name="GridContainer" type="GridContainer" parent="ui/variables"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 159.0
+offset_top = 12.0
+offset_right = 159.0
+offset_bottom = 12.0
+grow_horizontal = 0
+
 [node name="jellyquid2" parent="." instance=ExtResource("1_wtms1")]
-transform = Transform3D(-0.122775, 0.0213857, 0.992204, 0.171602, 0.985166, 7.50098e-09, -0.977486, 0.170265, -0.124623, 0.618203, 4.96856, -3.23357)
+transform = Transform3D(0.977341, -0.170573, 0.125333, 0.171929, 0.985109, 0, -0.123467, 0.0215484, 0.992115, 0.618203, 4.96856, -3.23357)
 
 [node name="Jellyquidskeleton" parent="jellyquid2" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.401018, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.545376, 0)
 
 [node name="Skeleton3D" parent="jellyquid2/Jellyquidskeleton" index="0"]
-bones/4/rotation = Quaternion(-0.128042, -1.18228e-07, -6.03408e-08, 0.991769)
+bones/4/rotation = Quaternion(-0.267134, -1.14877e-07, -7.82969e-08, 0.963659)
 bones/4/scale = Vector3(1, 0.999966, 0.999966)
-bones/5/rotation = Quaternion(0.0984806, -3.5877e-14, -2.66454e-15, 0.995139)
-bones/6/rotation = Quaternion(0.130333, 3.50641e-14, -3.55271e-15, 0.99147)
-bones/8/rotation = Quaternion(0.123751, 0.119559, 0.718971, 0.673403)
-bones/10/rotation = Quaternion(0.0851775, 0.0850332, 0.724767, 0.6784)
-bones/16/rotation = Quaternion(0.138346, 5.64528e-08, -6.14099e-08, 0.990384)
-bones/17/rotation = Quaternion(-0.0909071, 1.65613e-07, -3.03631e-07, 0.995859)
-bones/18/rotation = Quaternion(-0.0936206, -2.02481e-07, -7.49512e-07, 0.995608)
-bones/20/rotation = Quaternion(-0.0981901, 0.0921427, -0.724896, 0.67557)
-bones/22/rotation = Quaternion(-0.0745725, 0.0744878, -0.724344, 0.681335)
-bones/27/rotation = Quaternion(-0.602684, 0, 0, 0.79798)
-bones/28/rotation = Quaternion(-0.0520155, 0, 0, 0.998646)
+bones/5/rotation = Quaternion(-0.107566, -1.38287e-14, -6.21725e-15, 0.994198)
+bones/6/rotation = Quaternion(-0.268905, 4.35879e-14, -1.06581e-14, 0.963167)
+bones/8/rotation = Quaternion(-0.216747, -0.245272, 0.701945, 0.632563)
+bones/10/rotation = Quaternion(-0.103101, -0.110716, 0.733101, 0.663079)
+bones/16/rotation = Quaternion(0.272469, 7.50513e-08, -3.49501e-08, 0.962165)
+bones/17/rotation = Quaternion(0.108283, 1.24299e-07, -1.87411e-07, 0.99412)
+bones/18/rotation = Quaternion(0.287792, -3.86063e-07, -6.35835e-07, 0.957693)
+bones/20/rotation = Quaternion(0.226126, -0.255871, -0.700581, 0.626565)
+bones/22/rotation = Quaternion(0.107428, -0.114468, -0.732692, 0.662208)
+bones/27/rotation = Quaternion(-0.518996, 0, 0, 0.854777)
+bones/28/rotation = Quaternion(0.0591588, 0, 0, 0.998249)
 bones/28/scale = Vector3(1, 0.999927, 0.999927)
-bones/29/rotation = Quaternion(-0.0927467, 0, 0, 0.99569)
-bones/30/rotation = Quaternion(0.0843335, 0, 0, 0.996438)
-bones/33/rotation = Quaternion(0.636074, 2.17699e-07, -1.79456e-07, 0.771628)
+bones/29/rotation = Quaternion(0.153361, 0, 0, 0.98817)
+bones/30/rotation = Quaternion(0.301216, 0, 0, 0.953556)
+bones/33/rotation = Quaternion(0.557788, 2.34163e-07, -1.57369e-07, 0.829984)
 bones/33/scale = Vector3(1, 0.999989, 0.999989)
-bones/34/rotation = Quaternion(0.0517577, -4.06198e-23, 2.20234e-23, 0.99866)
-bones/35/rotation = Quaternion(0.0358807, 6.56493e-23, -5.67673e-23, 0.999356)
-bones/36/rotation = Quaternion(-0.199307, 1.07483e-22, -9.62972e-23, 0.979937)
+bones/34/rotation = Quaternion(-0.132167, -3.12794e-22, 3.17538e-23, 0.991228)
+bones/35/rotation = Quaternion(-0.105004, 4.19696e-22, 5.59594e-22, 0.994472)
+bones/36/rotation = Quaternion(-0.189338, 4.32216e-22, 1.97681e-22, 0.981912)
 
 [node name="jellyquid" parent="jellyquid2/Jellyquidskeleton/Skeleton3D" index="0"]
-"blend_shapes/Key 1" = 0.268328
-surface_material_override/0 = SubResource("StandardMaterial3D_dgghj")
+transform = Transform3D(-0.430709, 0.249699, 0.86726, 0.249699, 0.956421, -0.151361, -0.867261, 0.151361, -0.474288, 0.456508, 0.59364, 0)
+"blend_shapes/Key 1" = 0.364903
+surface_material_override/0 = SubResource("ShaderMaterial_wtms1")
 
 [node name="AnimationTree" type="AnimationTree" parent="jellyquid2"]
 tree_root = SubResource("AnimationNodeBlendTree_dgghj")
@@ -97,32 +152,5 @@ shadow_enabled = true
 
 [node name="Camera3D" type="Camera3D" parent="camera_rig"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
-
-[node name="303_controller" type="Node" parent="."]
-script = ExtResource("2_1nfj3")
-
-[node name="scroll" type="ScrollContainer" parent="303_controller"]
-offset_left = 31.0
-offset_top = 21.0
-offset_right = 958.0
-offset_bottom = 1046.0
-horizontal_scroll_mode = 0
-vertical_scroll_mode = 3
-
-[node name="console" type="Label" parent="303_controller/scroll"]
-layout_mode = 2
-
-[node name="variables" type="Node2D" parent="303_controller"]
-position = Vector2(1692, 15)
-
-[node name="GridContainer" type="GridContainer" parent="303_controller/variables"]
-anchors_preset = -1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = 159.0
-offset_top = 12.0
-offset_right = 159.0
-offset_bottom = 12.0
-grow_horizontal = 0
 
 [editable path="jellyquid2"]
